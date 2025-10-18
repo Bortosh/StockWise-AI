@@ -1,3 +1,6 @@
+import type { Unit } from './units';
+export type TransactionSource = 'INVOICE' | 'MANUAL';
+
 export interface User {
     id: string
     email: string
@@ -20,4 +23,20 @@ export interface Transaction {
     qty: number
     note?: string
     createdAt: string
+}
+
+export interface PurchaseInvoice {
+    id: string;
+    number: string;
+    supplier?: string;
+    date: string; // ISO yyyy-mm-dd
+    items: PurchaseInvoiceLine[];
+}
+
+export interface PurchaseInvoiceLine {
+    productId: string;
+    qty: number;
+    unit: Unit;           // unidad de la línea (puede ser distinta a la base)
+    unitCost?: number;
+    note?: string;
 }

@@ -1,1 +1,43 @@
+/* src/index.css */
 @import "tailwindcss";
+
+/* Tokens de tema (Tailwind v4) */
+@theme {
+    --color-primary: #2563eb;
+    /* azul acento */
+    --color-bg: #0b0c10;
+    /* fondo app */
+    --color-card: #111214;
+    /* superficies */
+    --color-muted: #6b7280;
+    /* texto secundario */
+
+    --radius: 12px;
+    /* radio base para cards/botones */
+}
+
+/* Base global */
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    background: var(--color-bg);
+    color: white;
+}
+
+/* Utilidades opcionales (v4 permite @utility) */
+@utility card {
+    @apply bg-card rounded-[var(--radius)] border border-white/5;
+}
+
+@utility muted {
+    color: var(--color-muted);
+}
+
+@utility test-bar {
+    background: red;
+    height: 8px;
+}
