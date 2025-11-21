@@ -7,6 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu'
 const nav = [
     { to: '/app/dashboard', label: 'Dashboard' },
     { to: '/app/products', label: 'Products' },
+    { to: '/app/inputs', label: 'Inputs' },
+    { to: '/app/outputs', label: 'Outputs' },
+    { to: '/app/alerts', label: 'Alerts' },
+    { to: '/app/weekly-summary', label: 'Weekly Summary' },
     { to: '/app/invoices', label: 'Facturas' },
     { to: '/app/transactions', label: 'Movimientos' },
     { to: '/app/settings', label: 'Ajustes' },

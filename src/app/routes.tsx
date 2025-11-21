@@ -6,6 +6,10 @@ import AppShell from './AppShell'
 import ProductsPage from '../features/products/ui/ProductsPage'
 import TransactionsPage from '../features/transactions/ui/TransactionsPage'
 import InvoicesPage from '../features/invoices/ui/InvoicesPage'
+import InputsPage from '../features/inventory/ui/InputsPage'
+import OutputsPage from '../features/inventory/ui/OutputsPage'
+import AlertsPage from '../features/inventory/ui/AlertsPage'
+import WeeklySummaryPage from '../features/inventory/ui/WeeklySummaryPage'
 
 
 export const router = createBrowserRouter([
@@ -19,6 +23,10 @@ export const router = createBrowserRouter([
                 children: [
                     { path: 'dashboard', element: <DashboardPage /> },
                     { path: 'products', element: <ProductsPage /> },
+                    { path: 'inputs', element: <InputsPage /> },
+                    { path: 'outputs', element: <OutputsPage /> },
+                    { path: 'alerts', element: <AlertsPage /> },
+                    { path: 'weekly-summary', element: <WeeklySummaryPage /> },
                     { path: 'transactions', element: <TransactionsPage /> },
                     { path: 'settings', element: <div>Settings</div> },
                     { path: 'invoices', element: <InvoicesPage /> },
