@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField, Typography, Select, MenuItem, FormControl, InputLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
-import { useProducts } from '../services/products.hooks'
+import { useProducts } from '../../products/services/products.hooks'
 import { useInputs, useCreateInput, useDeleteInput } from '../services/inputs.hooks'
 import { Product, CreateInputRequest } from '@/core/types'
 
@@ -42,28 +42,28 @@ export default function InputsPage() {
     return (
         <div className="space-y-4">
             <div className="flex justify-between items-center">
-                <Typography variant="h6">Stock Inputs (Entradas)</Typography>
+                <Typography variant="h6">Entradas de Stock</Typography>
                 <Button variant="contained" startIcon={<AddIcon />} onClick={() => setOpen(true)}>
-                    Record Input
+                    Registrar Entrada
                 </Button>
             </div>
 
             <Card className="card">
                 <CardContent>
                     {isLoading ? (
-                        <div className="text-gray-500">Loading inputs...</div>
+                        <div className="text-gray-500">Cargando entradas...</div>
                     ) : inputs.length === 0 ? (
-                        <div className="text-gray-500 py-4">No inputs recorded yet</div>
+                        <div className="text-gray-500 py-4">Sin entradas registradas aún</div>
                     ) : (
                         <TableContainer>
                             <Table size="small">
                                 <TableHead>
                                     <TableRow className="bg-gray-50">
-                                        <TableCell className="font-semibold">Product</TableCell>
-                                        <TableCell align="right" className="font-semibold">Quantity</TableCell>
-                                        <TableCell className="font-semibold">Date</TableCell>
-                                        <TableCell className="font-semibold">Note</TableCell>
-                                        <TableCell align="center" className="font-semibold">Action</TableCell>
+                                        <TableCell className="font-semibold">Producto</TableCell>
+                                        <TableCell align="right" className="font-semibold">Cantidad</TableCell>
+                                        <TableCell className="font-semibold">Fecha</TableCell>
+                                        <TableCell className="font-semibold">Nota</TableCell>
+                                        <TableCell align="center" className="font-semibold">Acción</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -93,10 +93,10 @@ export default function InputsPage() {
 
             <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
                 <form onSubmit={submit}>
-                    <DialogTitle>Record Stock Input</DialogTitle>
+                    <DialogTitle>Registrar Entrada de Stock</DialogTitle>
                     <DialogContent className="space-y-4 pt-4">
                         <FormControl fullWidth required>
-                            <InputLabel>Product</InputLabel>
+                            <InputLabel>Producto</InputLabel>
                             <Select
                                 value={form.productId}
                                 onChange={e => setForm({ ...form, productId: e.target.value })}
@@ -110,7 +110,7 @@ export default function InputsPage() {
                         </FormControl>
 
                         <TextField
-                            label="Quantity"
+                            label="Cantidad"
                             fullWidth
                             type="number"
                             required
@@ -120,19 +120,19 @@ export default function InputsPage() {
                         />
 
                         <TextField
-                            label="Note (optional)"
+                            label="Nota (opcional)"
                             fullWidth
                             multiline
                             rows={2}
                             value={form.note || ''}
                             onChange={e => setForm({ ...form, note: e.target.value })}
-                            placeholder="Add any notes about this input..."
+                            placeholder="Agrega notas sobre esta entrada..."
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleClose}>Cancelar</Button>
                         <Button type="submit" variant="contained">
-                            Record Input
+                            Registrar Entrada
                         </Button>
                     </DialogActions>
                 </form>

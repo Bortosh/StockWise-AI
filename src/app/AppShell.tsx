@@ -5,12 +5,12 @@ import { useAuthStore } from '../features/auth/store/auth.store'
 import MenuIcon from '@mui/icons-material/Menu'
 
 const nav = [
-    { to: '/app/dashboard', label: 'Dashboard' },
-    { to: '/app/products', label: 'Products' },
-    { to: '/app/inputs', label: 'Inputs' },
-    { to: '/app/outputs', label: 'Outputs' },
-    { to: '/app/alerts', label: 'Alerts' },
-    { to: '/app/weekly-summary', label: 'Weekly Summary' },
+    { to: '/app/dashboard', label: 'Panel' },
+    { to: '/app/products', label: 'Productos' },
+    { to: '/app/inputs', label: 'Entradas' },
+    { to: '/app/outputs', label: 'Salidas' },
+    { to: '/app/alerts', label: 'Alertas' },
+    { to: '/app/weekly-summary', label: 'Resumen Semanal' },
     { to: '/app/invoices', label: 'Facturas' },
     { to: '/app/transactions', label: 'Movimientos' },
     { to: '/app/settings', label: 'Ajustes' },
@@ -65,7 +65,7 @@ export default function AppShell() {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" className="flex-1">StockWise AI</Typography>
-                        <Button onClick={handleLogout}>Logout</Button>
+                        <Button onClick={handleLogout}>Cerrar Sesión</Button>
                     </Toolbar>
                 </AppBar>
                 <main className="p-4">

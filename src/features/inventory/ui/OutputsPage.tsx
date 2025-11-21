@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField, Typography, Select, MenuItem, FormControl, InputLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Alert } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
-import { useProducts } from '../services/products.hooks'
+import { useProducts } from '../../products/services/products.hooks'
 import { useOutputs, useCreateOutput, useDeleteOutput, useWeeklyOutputs } from '../services/outputs.hooks'
 import { Product, CreateOutputRequest, BusinessArea } from '@/core/types'
 
@@ -78,28 +78,28 @@ export default function OutputsPage() {
     return (
         <div className="space-y-4">
             <div className="flex justify-between items-center">
-                <Typography variant="h6">Stock Outputs (Salidas - Current Week)</Typography>
+                <Typography variant="h6">Salidas de Stock (Semana Actual)</Typography>
                 <Button variant="contained" startIcon={<AddIcon />} onClick={() => setOpen(true)}>
-                    Record Output
+                    Registrar Salida
                 </Button>
             </div>
 
             <Card className="card">
                 <CardContent>
                     {isLoading ? (
-                        <div className="text-gray-500">Loading outputs...</div>
+                        <div className="text-gray-500">Cargando salidas...</div>
                     ) : outputs.length === 0 ? (
-                        <div className="text-gray-500 py-4">No outputs recorded this week</div>
+                        <div className="text-gray-500 py-4">Sin salidas registradas esta semana</div>
                     ) : (
                         <TableContainer>
                             <Table size="small">
                                 <TableHead>
                                     <TableRow className="bg-gray-50">
-                                        <TableCell className="font-semibold">Product</TableCell>
-                                        <TableCell className="font-semibold">Area</TableCell>
-                                        <TableCell align="right" className="font-semibold">Quantity</TableCell>
-                                        <TableCell className="font-semibold">Date</TableCell>
-                                        <TableCell align="center" className="font-semibold">Action</TableCell>
+                                        <TableCell className="font-semibold">Producto</TableCell>
+                                        <TableCell className="font-semibold">Área</TableCell>
+                                        <TableCell align="right" className="font-semibold">Cantidad</TableCell>
+                                        <TableCell className="font-semibold">Fecha</TableCell>
+                                        <TableCell align="center" className="font-semibold">Acción</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -129,26 +129,26 @@ export default function OutputsPage() {
 
             <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
                 <form onSubmit={submit}>
-                    <DialogTitle>Record Stock Output</DialogTitle>
+                    <DialogTitle>Registrar Salida de Stock</DialogTitle>
                     <DialogContent className="space-y-4 pt-4">
                         {error && <Alert severity="error">{error}</Alert>}
 
                         <FormControl fullWidth required>
-                            <InputLabel>Product</InputLabel>
+                            <InputLabel>Producto</InputLabel>
                             <Select
                                 value={form.productId}
                                 onChange={e => handleProductChange(e.target.value)}
                             >
                                 {products.map(p => (
                                     <MenuItem key={p.id} value={p.id}>
-                                        {p.name} (Stock: {p.stock}, Area: {p.almacen})
+                                        {p.name} (Stock: {p.stock}, Área: {p.almacen})
                                     </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
 
                         <TextField
-                            label="Quantity"
+                            label="Cantidad"
                             fullWidth
                             type="number"
                             required
@@ -158,7 +158,7 @@ export default function OutputsPage() {
                         />
 
                         <FormControl fullWidth>
-                            <InputLabel>Distribution Area</InputLabel>
+                            <InputLabel>Área de Distribución</InputLabel>
                             <Select
                                 value={form.areaDestino}
                                 onChange={e => setForm({ ...form, areaDestino: e.target.value as BusinessArea })}
@@ -169,9 +169,9 @@ export default function OutputsPage() {
                         </FormControl>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleClose}>Cancelar</Button>
                         <Button type="submit" variant="contained">
-                            Record Output
+                            Registrar Salida
                         </Button>
                     </DialogActions>
                 </form>

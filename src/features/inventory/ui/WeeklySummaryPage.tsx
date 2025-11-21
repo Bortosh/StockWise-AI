@@ -3,7 +3,7 @@ import { Button, Card, CardContent, Typography, Dialog, DialogActions, DialogCon
 import RefreshIcon from '@mui/icons-material/Refresh'
 import WarningIcon from '@mui/icons-material/Warning'
 import { useWeeklySummary, useWeeklyReset } from '../services/outputs.hooks'
-import { useProducts } from '../services/products.hooks'
+import { useProducts } from '../../products/services/products.hooks'
 
 export default function WeeklySummaryPage() {
     const { data: summary, isLoading } = useWeeklySummary()
@@ -25,7 +25,7 @@ export default function WeeklySummaryPage() {
     }
 
     const getDayName = (dateString: string) => {
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
         const date = new Date(dateString)
         return days[date.getDay()]
     }
@@ -33,7 +33,7 @@ export default function WeeklySummaryPage() {
     if (isLoading) {
         return (
             <Card>
-                <CardContent className="text-gray-500">Loading weekly summary...</CardContent>
+                <CardContent className="text-gray-500">Cargando resumen semanal...</CardContent>
             </Card>
         )
     }
@@ -54,28 +54,28 @@ export default function WeeklySummaryPage() {
     return (
         <div className="space-y-4">
             <div className="flex justify-between items-center">
-                <Typography variant="h6">Weekly Summary (Week {summary?.week})</Typography>
+                <Typography variant="h6">Resumen Semanal (Semana {summary?.week})</Typography>
                 <Button
                     variant="outlined"
                     color="warning"
                     startIcon={<RefreshIcon />}
                     onClick={() => setResetOpen(true)}
                 >
-                    Reset Week
+                    Reiniciar Semana
                 </Button>
             </div>
 
             <Alert severity="info">
-                📅 This view shows all stock outputs for the current week (Monday-Sunday).
-                Every Monday, the previous week's outputs are automatically cleared.
-                The stock totals are NOT reset, only the output history.
+                📅 Esta vista muestra todas las salidas de stock de la semana actual (Lunes-Domingo).
+                Cada lunes, las salidas de la semana anterior se eliminan automáticamente.
+                El stock total NO se reinicia, solo el historial de salidas.
             </Alert>
 
             {outputs.length === 0 ? (
                 <Card>
                     <CardContent className="text-center py-8">
                         <Typography className="text-gray-500">
-                            No outputs recorded this week yet.
+                            Sin salidas registradas esta semana aún.
                         </Typography>
                     </CardContent>
                 </Card>
@@ -84,7 +84,7 @@ export default function WeeklySummaryPage() {
                     <Card className="bg-blue-50">
                         <CardContent>
                             <Typography className="text-sm">
-                                <span className="font-semibold">Total Outputs This Week:</span> {outputs.length}
+                                <span className="font-semibold">Total de Salidas Esta Semana:</span> {outputs.length}
                             </Typography>
                         </CardContent>
                     </Card>
@@ -99,12 +99,12 @@ export default function WeeklySummaryPage() {
                                 <TableContainer>
                                     <Table size="small">
                                         <TableHead>
-                                            <TableRow className="bg-gray-50">
-                                                <TableCell className="font-semibold">Product</TableCell>
-                                                <TableCell className="font-semibold">Area</TableCell>
-                                                <TableCell align="right" className="font-semibold">Quantity</TableCell>
-                                                <TableCell className="font-semibold">Time</TableCell>
-                                            </TableRow>
+                                        <TableRow className="bg-gray-50">
+                                            <TableCell className="font-semibold">Producto</TableCell>
+                                            <TableCell className="font-semibold">Área</TableCell>
+                                            <TableCell align="right" className="font-semibold">Cantidad</TableCell>
+                                            <TableCell className="font-semibold">Hora</TableCell>
+                                        </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {groupedByDay[day].map(output => (
@@ -125,7 +125,7 @@ export default function WeeklySummaryPage() {
                                 </TableContainer>
 
                                 <Typography className="text-sm text-gray-600 mt-3">
-                                    Daily Total: <span className="font-semibold">{groupedByDay[day].reduce((sum, o) => sum + o.quantity, 0)} units</span>
+                                    Total Diario: <span className="font-semibold">{groupedByDay[day].reduce((sum, o) => sum + o.quantity, 0)} unidades</span>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -137,26 +137,26 @@ export default function WeeklySummaryPage() {
             <Dialog open={resetOpen} onClose={() => setResetOpen(false)} fullWidth maxWidth="sm">
                 <DialogTitle className="flex items-center gap-2">
                     <WarningIcon color="warning" />
-                    Weekly Reset
+                    Reinicio Semanal
                 </DialogTitle>
                 <DialogContent className="pt-4">
                     <Alert severity="warning" className="mb-4">
-                        This will delete all output records from the previous week.
-                        <strong>Stock totals will NOT be affected.</strong>
+                        Esto eliminará todos los registros de salida de la semana anterior.
+                        <strong>El stock total NO será afectado.</strong>
                     </Alert>
                     <Typography>
-                        Are you sure you want to proceed with the weekly reset?
+                        ¿Estás segura de que deseas proceder con el reinicio semanal?
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setResetOpen(false)}>Cancel</Button>
+                    <Button onClick={() => setResetOpen(false)}>Cancelar</Button>
                     <Button
                         variant="contained"
                         color="warning"
                         onClick={handleReset}
                         disabled={weeklyResetM.isPending}
                     >
-                        {weeklyResetM.isPending ? 'Resetting...' : 'Confirm Reset'}
+                        {weeklyResetM.isPending ? 'Reiniciando...' : 'Confirmar Reinicio'}
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { getDatabase } from '../database/init';
-import { Output, Product, CreateOutputRequest, BusinessArea, BUSINESS_AREAS } from '../types';
+import { getDatabase } from '../database/init.js';
+import { Output, Product, CreateOutputRequest, BusinessArea, BUSINESS_AREAS } from '../types.js';
 
 // Helper function: Get current week number
 function getCurrentWeek(): number {

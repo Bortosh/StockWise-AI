@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { getDatabase } from '../database/init';
-import { Product, StockAlert } from '../types';
+import { getDatabase } from '../database/init.js';
+import { Product, StockAlert } from '../types.js';
 
 // GET all active stock alerts
 export async function getAlerts(req: Request, res: Response): Promise<void> {

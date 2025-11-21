@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { getDatabase } from '../database/init';
+import { getDatabase } from '../database/init.js';
 import {
   Product,
   CreateProductRequest,
   UpdateProductRequest,
   BusinessArea,
   BUSINESS_AREAS,
-} from '../types';
+} from '../types.js';
 
 // GET all products
 export async function getProducts(req: Request, res: Response): Promise<void> {

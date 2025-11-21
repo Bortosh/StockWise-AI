@@ -4,7 +4,7 @@ import {
   getInputsByDateRange,
   createInput,
   deleteInput,
-} from '../controllers/input.controller';
+} from '../controllers/input.controller.js';
 
 const router = Router();
 

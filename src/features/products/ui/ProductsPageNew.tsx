@@ -69,13 +69,13 @@ export default function ProductsPage() {
     return (
         <div className="space-y-4">
             <div className="flex justify-between items-center">
-                <Typography variant="h6">Products Management</Typography>
-                <Button variant="contained" onClick={() => setOpen(true)}>+ New Product</Button>
+                <Typography variant="h6">Gestión de Productos</Typography>
+                <Button variant="contained" onClick={() => setOpen(true)}>+ Nuevo Producto</Button>
             </div>
 
             {isLoading ? (
                 <Card>
-                    <CardContent className="text-gray-500">Loading products...</CardContent>
+                    <CardContent className="text-gray-500">Cargando productos...</CardContent>
                 </Card>
             ) : (
                 BUSINESS_AREAS.map(area => (
@@ -84,15 +84,15 @@ export default function ProductsPage() {
                             <Typography variant="subtitle1" className="mb-4 font-semibold">{area}</Typography>
                             
                             {groupedByArea[area].length === 0 ? (
-                                <div className="text-gray-500 py-4">No products in this area</div>
+                                <div className="text-gray-500 py-4">No hay productos en esta área</div>
                             ) : (
                                 <div className="space-y-2">
                                     <div className="grid grid-cols-12 text-sm text-gray-600 font-semibold mb-2">
-                                        <div className="col-span-4">Name</div>
+                                        <div className="col-span-4">Nombre</div>
                                         <div className="col-span-2">Stock</div>
-                                        <div className="col-span-2">Min Stock</div>
-                                        <div className="col-span-2">Status</div>
-                                        <div className="col-span-2">Actions</div>
+                                        <div className="col-span-2">Stock Mín</div>
+                                        <div className="col-span-2">Estado</div>
+                                        <div className="col-span-2">Acciones</div>
                                     </div>
                                     
                                     {groupedByArea[area].map(p => (
@@ -102,7 +102,7 @@ export default function ProductsPage() {
                                             <div className="col-span-2">{p.minimumStock}</div>
                                             <div className="col-span-2">
                                                 {isLowStock(p) ? (
-                                                    <Chip icon={<WarningIcon />} label="Low Stock" color="error" size="small" />
+                                                    <Chip icon={<WarningIcon />} label="Stock Bajo" color="error" size="small" />
                                                 ) : (
                                                     <Chip label="OK" color="success" size="small" />
                                                 )}
@@ -126,19 +126,19 @@ export default function ProductsPage() {
 
             <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
                 <form onSubmit={submit}>
-                    <DialogTitle>{editingId ? 'Edit Product' : 'Create New Product'}</DialogTitle>
+                    <DialogTitle>{editingId ? 'Editar Producto' : 'Crear Nuevo Producto'}</DialogTitle>
                     <DialogContent className="space-y-4 pt-4">
                         <TextField
-                            label="Product Name"
+                            label="Nombre del Producto"
                             fullWidth
                             required
                             value={form.name}
                             onChange={e => setForm({ ...form, name: e.target.value })}
-                            placeholder="e.g., Mozzarella"
+                            placeholder="ej. Mozzarella"
                         />
                         
                         <TextField
-                            label="Minimum Stock"
+                            label="Stock Mínimo"
                             fullWidth
                             type="number"
                             value={form.minimumStock}
@@ -148,7 +148,7 @@ export default function ProductsPage() {
 
                         {!editingId && (
                             <FormControl fullWidth>
-                                <InputLabel>Area</InputLabel>
+                                <InputLabel>Área</InputLabel>
                                 <Select
                                     value={form.almacen}
                                     onChange={e => setForm({ ...form, almacen: e.target.value as BusinessArea })}
@@ -161,9 +161,9 @@ export default function ProductsPage() {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleClose}>Cancelar</Button>
                         <Button type="submit" variant="contained">
-                            {editingId ? 'Save Changes' : 'Create Product'}
+                            {editingId ? 'Guardar Cambios' : 'Crear Producto'}
                         </Button>
                     </DialogActions>
                 </form>

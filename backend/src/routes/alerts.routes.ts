@@ -4,7 +4,7 @@ import {
   getAlertsByArea,
   formatWhatsAppMessage,
   getAlertsSummary,
-} from '../controllers/alert.controller';
+} from '../controllers/alert.controller.js';
 
 const router = Router();
 

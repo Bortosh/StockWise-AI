@@ -62,10 +62,10 @@ export default function AlertsPage() {
     return (
         <div className="space-y-4">
             <div className="flex justify-between items-center">
-                <Typography variant="h6">Stock Alerts</Typography>
+                <Typography variant="h6">Alertas de Stock</Typography>
                 <Chip
                     icon={<WarningIcon />}
-                    label={`${alerts.length} Active Alerts`}
+                    label={`${alerts.length} Alertas Activas`}
                     color={alerts.length > 0 ? 'error' : 'default'}
                     variant="outlined"
                 />
@@ -75,7 +75,7 @@ export default function AlertsPage() {
                 <Card>
                     <CardContent className="text-center py-8">
                         <Typography className="text-gray-500">
-                            No stock alerts. All products are above minimum stock levels.
+                            Sin alertas de stock. Todos los productos están por encima del stock mínimo.
                         </Typography>
                     </CardContent>
                 </Card>
@@ -101,22 +101,20 @@ export default function AlertsPage() {
                                                 className="p-4 bg-red-50 rounded-lg border border-red-200"
                                             >
                                                 <div className="flex items-start justify-between">
-                                                    <div className="flex-1">
-                                                        <Typography className="font-semibold text-red-900">
-                                                            {alert.productName}
-                                                        </Typography>
-                                                        <Typography className="text-sm text-red-800 mt-1">
-                                                            Current Stock: <span className="font-semibold">{alert.currentStock}</span>
-                                                        </Typography>
-                                                        <Typography className="text-sm text-red-800">
-                                                            Minimum Required: <span className="font-semibold">{alert.minimumStock}</span>
-                                                        </Typography>
-                                                        <Typography className="text-xs text-red-700 mt-2">
-                                                            Deficit: <span className="font-semibold">{alert.minimumStock - alert.currentStock}</span> units
-                                                        </Typography>
-                                                    </div>
-
-                                                    <Button
+                                    <div className="flex-1">
+                                        <Typography className="font-semibold text-red-900">
+                                            {alert.productName}
+                                        </Typography>
+                                        <Typography className="text-sm text-red-800 mt-1">
+                                            Stock Actual: <span className="font-semibold">{alert.currentStock}</span>
+                                        </Typography>
+                                        <Typography className="text-sm text-red-800">
+                                            Stock Mínimo: <span className="font-semibold">{alert.minimumStock}</span>
+                                        </Typography>
+                                        <Typography className="text-xs text-red-700 mt-2">
+                                            Déficit: <span className="font-semibold">{alert.minimumStock - alert.currentStock}</span> unidades
+                                        </Typography>
+                                    </div>                                                    <Button
                                                         variant="outlined"
                                                         color="error"
                                                         size="small"
@@ -124,7 +122,7 @@ export default function AlertsPage() {
                                                         onClick={() => handleShareWhatsApp(alert)}
                                                         className="ml-4"
                                                     >
-                                                        Share
+                                                        Compartir
                                                     </Button>
                                                 </div>
                                             </Box>
@@ -139,14 +137,14 @@ export default function AlertsPage() {
                     <Card className="bg-blue-50 border border-blue-200">
                         <CardContent>
                             <Typography variant="subtitle1" className="font-semibold mb-3">
-                                📊 Summary
+                                📊 Resumen
                             </Typography>
                             <div className="space-y-1">
                                 <Typography className="text-sm">
-                                    <span className="font-semibold">Total Alerts:</span> {alerts.length}
+                                    <span className="font-semibold">Total de Alertas:</span> {alerts.length}
                                 </Typography>
                                 <Typography className="text-sm">
-                                    <span className="font-semibold">Affected Areas:</span> {Object.keys(summary?.alertsSummary || {}).length}
+                                    <span className="font-semibold">Áreas Afectadas:</span> {Object.keys(summary?.alertsSummary || {}).length}
                                 </Typography>
                             </div>
                         </CardContent>
@@ -156,21 +154,21 @@ export default function AlertsPage() {
 
             {/* WhatsApp Share Dialog */}
             <Dialog open={whatsappOpen} onClose={closeDialog} fullWidth maxWidth="sm">
-                <DialogTitle>Share Alert via WhatsApp</DialogTitle>
+                <DialogTitle>Compartir Alerta por WhatsApp</DialogTitle>
                 <DialogContent className="space-y-4 pt-4">
                     {selectedAlert && (
                         <>
                             <Alert severity="info">
-                                Alert: <strong>{selectedAlert.productName}</strong> - Stock: {selectedAlert.currentStock} (Min: {selectedAlert.minimumStock})
+                                Alerta: <strong>{selectedAlert.productName}</strong> - Stock: {selectedAlert.currentStock} (Mín: {selectedAlert.minimumStock})
                             </Alert>
 
                             <TextField
-                                label="Phone Number"
+                                label="Número de Teléfono"
                                 fullWidth
                                 placeholder="+1234567890"
                                 value={phone}
                                 onChange={e => setPhone(e.target.value)}
-                                helperText="Enter the recipient's phone number with country code"
+                                helperText="Ingresa el número con código de país"
                             />
 
                             <Button
@@ -180,13 +178,13 @@ export default function AlertsPage() {
                                 onClick={generateMessage}
                                 disabled={!phone}
                             >
-                                Generate Message
+                                Generar Mensaje
                             </Button>
 
                             {shareUrl && (
                                 <div className="space-y-3 pt-4 border-t">
                                     <Alert severity="success">
-                                        Message ready to share!
+                                        ¡Mensaje listo para compartir!
                                     </Alert>
                                     <Button
                                         fullWidth
@@ -194,7 +192,7 @@ export default function AlertsPage() {
                                         color="success"
                                         onClick={openWhatsApp}
                                     >
-                                        Open WhatsApp
+                                        Abrir WhatsApp
                                     </Button>
                                 </div>
                             )}

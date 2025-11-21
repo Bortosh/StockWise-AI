@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { getDatabase } from '../database/init';
-import { Input, Product, CreateInputRequest } from '../types';
+import { getDatabase } from '../database/init.js';
+import { Input, Product, CreateInputRequest } from '../types.js';
 
 // GET all inputs
 export async function getInputs(req: Request, res: Response): Promise<void> {

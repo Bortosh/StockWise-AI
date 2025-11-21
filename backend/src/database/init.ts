@@ -2,6 +2,7 @@ import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,14 +10,44 @@ const __dirname = path.dirname(__filename);
 let db: Database | null = null;
 
 export async function initializeDatabase(): Promise<Database> {
-  const dbPath = process.env.DATABASE_PATH || path.join(__dirname, '../../data/inventory.db');
+  let dbPath = process.env.DATABASE_PATH;
+  
+  if (!dbPath) {
+    // Fallback: use absolute path to data directory
+    const projectRoot = path.resolve(__dirname, '../../');
+    dbPath = path.join(projectRoot, 'data', 'inventory.db');
+  }
+  
+  // Normalize path
+  dbPath = path.resolve(dbPath);
+  const dbDir = path.dirname(dbPath);
 
-  db = await open({
-    filename: dbPath,
-    driver: sqlite3.Database,
-  });
+  // Ensure data directory exists
+  try {
+    if (!fs.existsSync(dbDir)) {
+      fs.mkdirSync(dbDir, { recursive: true });
+      console.log(`✓ Created directory: ${dbDir}`);
+    }
+  } catch (err) {
+    console.error(`✗ Failed to create directory: ${dbDir}`, err);
+    throw err;
+  }
+
+  console.log(`✓ Opening database at: ${dbPath}`);
+
+  try {
+    db = await open({
+      filename: dbPath,
+      driver: sqlite3.Database,
+    });
+    console.log(`✓ Database connection established`);
+  } catch (err) {
+    console.error(`✗ Failed to open database:`, err);
+    throw err;
+  }
 
   await db.exec('PRAGMA foreign_keys = ON');
+  console.log(`✓ Foreign keys enabled`);
 
   // Create tables
   await db.exec(`
@@ -57,6 +88,7 @@ export async function initializeDatabase(): Promise<Database> {
     CREATE INDEX IF NOT EXISTS idx_outputs_date ON outputs(date);
     CREATE INDEX IF NOT EXISTS idx_outputs_week ON outputs(week);
   `);
+  console.log(`✓ Database tables and indexes created`);
 
   return db;
 }

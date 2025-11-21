@@ -1,11 +1,12 @@
 import express, { Express } from 'express';
-import { initializeDatabase, closeDatabase } from './database/init';
-import { corsMiddleware } from './middleware/cors';
+import 'dotenv/config';
+import { initializeDatabase, closeDatabase } from './database/init.js';
+import { corsMiddleware } from './middleware/cors.js';
 
-import productsRouter from './routes/products.routes';
-import inputsRouter from './routes/inputs.routes';
-import outputsRouter from './routes/outputs.routes';
-import alertsRouter from './routes/alerts.routes';
+import productsRouter from './routes/products.routes.js';
+import inputsRouter from './routes/inputs.routes.js';
+import outputsRouter from './routes/outputs.routes.js';
+import alertsRouter from './routes/alerts.routes.js';
 
 const app: Express = express();
 const PORT = process.env.PORT || 3000;

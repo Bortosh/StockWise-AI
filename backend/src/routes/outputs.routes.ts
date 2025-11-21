@@ -7,7 +7,7 @@ import {
   deleteOutput,
   weeklyReset,
   getWeeklySummary,
-} from '../controllers/output.controller';
+} from '../controllers/output.controller.js';
 
 const router = Router();
 
